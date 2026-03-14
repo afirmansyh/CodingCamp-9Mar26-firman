@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Storage Warning Message -->
+  <div id="storage-warning" class="storage-warning" style="display: none;">
+    ⚠️ Local Storage is unavailable. Your data will not be saved between sessions.
+  </div>
+  
+  <main class="dashboard">
+    <!-- Greeting Component -->
+    <section id="greeting-component" class="component" aria-label="Time and greeting">
+      <div id="current-time" aria-live="polite" aria-atomic="true"></div>
+      <div id="current-date" aria-live="polite" aria-atomic="true"></div>
+      <div id="greeting-message" aria-live="polite" aria-atomic="true"></div>
+    </section>
+
+    <!-- Middle Row: Timer and Tasks side by side -->
+    <div class="middle-row">
+      <!-- Focus Timer Component -->
+      <section id="timer-component" class="component" aria-label="Focus timer">
+        <h1>Focus Timer</h1>
+        <div id="timer-display" role="timer" aria-live="polite" aria-atomic="true" aria-label="Time remaining">25:00</div>
+        <div id="timer-controls" role="group" aria-label="Timer controls">
+          <button id="timer-start" aria-label="Start timer">Start</button>
+          <button id="timer-stop" aria-label="Stop timer">Stop</button>
+          <button id="timer-reset" aria-label="Reset timer to 25 minutes">Reset</button>
+        </div>
+      </section>
+
+      <!-- To-Do List Component -->
+      <section id="todo-component" class="component" aria-labelledby="todo-heading">
+        <h1 id="todo-heading">Tasks</h1>
+        <div id="todo-input-section" role="group" aria-label="Add new task">
+          <input id="todo-input" type="text" placeholder="Add a new task..." aria-label="New task description">
+          <button id="todo-add" aria-label="Add task">Add</button>
+        </div>
+        <ul id="todo-list" aria-live="polite" aria-label="Task list"></ul>
+      </section>
+    </div>
+
+    <!-- Bottom Row: Quick Links (aligned with timer column) -->
+    <div class="bottom-row">
+      <!-- Quick Links Component -->
+      <section id="links-component" class="component" aria-labelledby="links-heading">
+        <h1 id="links-heading">Quick Links</h1>
+        <div id="links-input-section" role="group" aria-label="Add new link">
+          <input id="link-name" type="text" placeholder="Link name" aria-label="Link name">
+          <input id="link-url" type="url" placeholder="URL" aria-label="Link URL">
+          <button id="link-add" aria-label="Add link">Add Link</button>
+        </div>
+        <div id="links-container" aria-live="polite" aria-label="Quick links list"></div>
+      </section>
+      
+      <!-- Empty space to maintain grid alignment -->
+      <div></div>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

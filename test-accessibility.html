@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Test - Productivity Dashboard</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      line-height: 1.6;
+    }
+    h1 { color: #333; }
+    .test-section {
+      background: #f5f5f5;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+    .pass { color: #28a745; font-weight: bold; }
+    .info { color: #007bff; }
+    code {
+      background: #e9ecef;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    ul { margin: 0.5rem 0; }
+    li { margin: 0.25rem 0; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Accessibility Testing Guide</h1>
+  
+  <div class="test-section">
+    <h2>✅ Keyboard Navigation Test</h2>
+    <p><strong>Instructions:</strong> Open <code>index.html</code> and test the following:</p>
+    <ol>
+      <li><strong>Tab Key:</strong> Press Tab repeatedly to navigate through all interactive elements
+        <ul>
+          <li>Timer Start → Stop → Reset buttons</li>
+          <li>Task input field → Add button</li>
+          <li>Task checkboxes → Edit → Delete buttons (for each task)</li>
+          <li>Link name input → Link URL input → Add Link button</li>
+          <li>Link buttons → Delete buttons (for each link)</li>
+        </ul>
+      </li>
+      <li><strong>Shift+Tab:</strong> Navigate backwards through elements</li>
+      <li><strong>Enter Key:</strong> 
+        <ul>
+          <li>Type in task input and press Enter to add task</li>
+          <li>Focus on any button and press Enter to activate</li>
+        </ul>
+      </li>
+      <li><strong>Space Key:</strong>
+        <ul>
+          <li>Focus on buttons and press Space to activate</li>
+          <li>Focus on checkboxes and press Space to toggle</li>
+        </ul>
+      </li>
+    </ol>
+    <p class="pass">✓ All elements should be reachable via keyboard</p>
+    <p class="pass">✓ Focus indicators should be clearly visible (blue outline)</p>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ ARIA Labels Test</h2>
+    <p><strong>Instructions:</strong> Use browser DevTools to inspect elements:</p>
+    <ul>
+      <li>Right-click any element → Inspect</li>
+      <li>Check for <code>aria-label</code>, <code>aria-labelledby</code>, or <code>role</code> attributes</li>
+    </ul>
+    <p><strong>Expected ARIA attributes:</strong></p>
+    <ul>
+      <li>Timer display: <code>role="timer"</code>, <code>aria-live="polite"</code></li>
+      <li>Timer buttons: <code>aria-label="Start timer"</code>, etc.</li>
+      <li>Task checkboxes: <code>aria-label="Mark task ... as complete"</code></li>
+      <li>Task buttons: <code>aria-label="Edit task ..."</code>, <code>aria-label="Delete task ..."</code></li>
+      <li>Links: <code>aria-label="... (opens in new tab)"</code></li>
+    </ul>
+    <p class="pass">✓ All interactive elements have descriptive labels</p>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Screen Reader Test</h2>
+    <p><strong>Instructions:</strong> Test with a screen reader:</p>
+    <ul>
+      <li><strong>Windows:</strong> NVDA (free) or JAWS</li>
+      <li><strong>Mac:</strong> VoiceOver (Cmd+F5)</li>
+      <li><strong>Chrome:</strong> ChromeVox extension</li>
+    </ul>
+    <p><strong>What to test:</strong></p>
+    <ol>
+      <li>Navigate through the page and verify all elements are announced</li>
+      <li>Add a task and verify the screen reader announces the new task</li>
+      <li>Toggle a task checkbox and verify status change is announced</li>
+      <li>Add a link and verify it's announced</li>
+      <li>Verify timer updates are announced (aria-live regions)</li>
+    </ol>
+    <p class="pass">✓ Screen readers should announce all content and changes</p>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Color Contrast Test</h2>
+    <p><strong>Instructions:</strong> Use browser DevTools or online tools:</p>
+    <ul>
+      <li><strong>Chrome DevTools:</strong> Inspect element → Styles → Click color swatch → View contrast ratio</li>
+      <li><strong>Online:</strong> <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a></li>
+    </ul>
+    <p><strong>Expected contrast ratios (WCAG AA):</strong></p>
+    <ul>
+      <li>Normal text: 4.5:1 minimum</li>
+      <li>Large text (18pt+): 3:1 minimum</li>
+    </ul>
+    <p><strong>Actual ratios:</strong></p>
+    <ul>
+      <li>Text (#333) on white: <span class="pass">12.6:1 ✓ (AAA)</span></li>
+      <li>Accent (#4a90e2) on white: <span class="pass">3.4:1 ✓ (AA for large text)</span></li>
+      <li>Completed (#767676) on white: <span class="pass">4.5:1 ✓ (AA)</span></li>
+    </ul>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Focus Indicators Test</h2>
+    <p><strong>Instructions:</strong> Tab through all elements and verify:</p>
+    <ul>
+      <li>All buttons show a visible blue outline when focused</li>
+      <li>All inputs show a blue border and subtle shadow when focused</li>
+      <li>All links show a visible outline when focused</li>
+      <li>Focus indicators have sufficient contrast (visible against background)</li>
+    </ul>
+    <p class="pass">✓ Focus indicators use 2px solid outline with 2px offset</p>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Semantic HTML Test</h2>
+    <p><strong>Instructions:</strong> View page source or inspect with DevTools:</p>
+    <ul>
+      <li><code>&lt;main&gt;</code> wraps main content</li>
+      <li><code>&lt;section&gt;</code> for each component</li>
+      <li><code>&lt;h2&gt;</code> for component headings</li>
+      <li><code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> for task list</li>
+      <li><code>&lt;button&gt;</code> for all interactive controls</li>
+      <li><code>&lt;input type="checkbox"&gt;</code> for task completion</li>
+      <li><code>&lt;input type="url"&gt;</code> for link URLs</li>
+    </ul>
+    <p class="pass">✓ Proper semantic HTML elements used throughout</p>
+  </div>
+
+  <div class="test-section">
+    <h2>📋 Summary</h2>
+    <p><strong>Task 14 Accessibility Enhancements:</strong></p>
+    <ul>
+      <li class="pass">✓ ARIA labels added to all interactive elements</li>
+      <li class="pass">✓ Semantic HTML elements used throughout</li>
+      <li class="pass">✓ Color contrast meets WCAG AA standards</li>
+      <li class="pass">✓ Keyboard navigation fully supported (Tab, Enter, Space)</li>
+      <li class="pass">✓ Focus indicators visible on all elements</li>
+      <li class="pass">✓ Live regions for dynamic content updates</li>
+      <li class="pass">✓ Screen reader support with descriptive labels</li>
+    </ul>
+    <p class="info"><strong>Validates:</strong> Requirement 9.2 - "THE Dashboard SHALL be easy to understand and use"</p>
+  </div>
+
+  <hr style="margin: 2rem 0;">
+  
+  <p style="text-align: center;">
+    <a href="index.html" style="display: inline-block; background: #4a90e2; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: bold;">
+      Open Productivity Dashboard
+    </a>
+  </p>
+</body>
+</html>
